@@ -1,6 +1,7 @@
 package com.cloudoer.project.project.module.controller;
 
 import com.cloudoer.project.project.module.config.UserConfig;
+import com.cloudoer.project.project.module.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -29,6 +30,9 @@ public class TestController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping
     public Object test() {
         return "hello spring boot, " + new Date();
@@ -53,5 +57,10 @@ public class TestController {
     public Object testJdbc() {
         log.info("jdbc....");
         return jdbcTemplate.queryForObject("select count(*) from USER", Integer.class);
+    }
+
+    @GetMapping("mybatis")
+    public Object testMybatis() {
+        return userService.list();
     }
 }
