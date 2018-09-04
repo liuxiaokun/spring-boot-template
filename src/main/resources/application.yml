@@ -1,0 +1,5 @@
+#自定义配置文件
+user:
+  cname: fred
+  age: 22
+  info: ${user.cname}已经${user.age}
