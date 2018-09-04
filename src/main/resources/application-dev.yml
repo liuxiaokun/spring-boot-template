@@ -3,3 +3,9 @@ user:
   cname: fred1
   age: 221
   info: ${user.cname}已经${user.age}
+
+#Redis配置
+spring:
+  redis:
+    host: localhost
+    port: 6379
