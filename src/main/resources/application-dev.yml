@@ -39,3 +39,13 @@ pagehelper:
   pageSizeZero: true
   params: count=countSql
 
+#spring-boot监控
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: health,info,env,metrics,trace,beans,status,loggers
+      base-path: /monitor
+  server:
+    port: 8081
