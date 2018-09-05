@@ -18,6 +18,11 @@ spring:
     username: root
     password: root
 
+#配置分布式session
+  session:
+    store-type: redis
+
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.cloudoer.project.project.module.bean

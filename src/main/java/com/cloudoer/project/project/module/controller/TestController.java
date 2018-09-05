@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.UUID;
 
@@ -75,5 +77,25 @@ public class TestController {
         BeanUtils.copyProperties(userVo, userDto);
         userService.addUser(userDto);
         return "SUCCESS";
+    }
+
+    @GetMapping("ng")
+    public Object testNg(HttpServletRequest request) {
+        log.info("ng, port:{}",  request.getLocalPort());
+        return "ng:" + request.getLocalPort();
+    }
+
+    @GetMapping("session")
+    public Object testSession(HttpServletRequest request) {
+        log.info("session, port:{}",  request.getLocalPort());
+
+        HttpSession session = request.getSession();
+        log.info("session class:{}", session.getClass());
+        log.info("session id:{}", session.getId());
+
+        log.info("session value before:{}", session.getAttribute("user"));
+        session.setAttribute("user", "fred");
+        log.info("session value after:{}", session.getAttribute("user"));
+        return "hey, fred. :" + request.getLocalPort();
     }
 }
