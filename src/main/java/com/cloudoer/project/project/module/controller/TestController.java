@@ -1,12 +1,16 @@
 package com.cloudoer.project.project.module.controller;
 
 import com.cloudoer.project.project.module.config.UserConfig;
+import com.cloudoer.project.project.module.dto.UserDto;
 import com.cloudoer.project.project.module.service.UserService;
+import com.cloudoer.project.project.module.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -47,9 +51,9 @@ public class TestController {
     @GetMapping("redis")
     public Object testRedis(String key) {
         log.info("key:{}", key);
-        log.info("get value:{}",stringRedisTemplate.opsForValue().get(key));
+        log.info("get value:{}", stringRedisTemplate.opsForValue().get(key));
         stringRedisTemplate.opsForValue().set(key, UUID.randomUUID().toString());
-        log.info("get value:{}",stringRedisTemplate.opsForValue().get(key));
+        log.info("get value:{}", stringRedisTemplate.opsForValue().get(key));
         return key;
     }
 
@@ -62,5 +66,14 @@ public class TestController {
     @GetMapping("mybatis")
     public Object testMybatis() {
         return userService.list();
+    }
+
+    @PostMapping("user")
+    public Object testMybatisAdd(UserVo userVo) {
+
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(userVo, userDto);
+        userService.addUser(userDto);
+        return "SUCCESS";
     }
 }

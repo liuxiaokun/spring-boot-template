@@ -13,5 +13,15 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
+    /**
+     * query all data from user table
+     * @return all users
+     */
     List<User> query();
+
+    /**
+     * insert one user into user table
+     * @param user data will be inserted.
+     */
+    void add(User user);
 }

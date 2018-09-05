@@ -15,4 +15,8 @@
     <include refid="baseColumnList" />
       from user
     </select>
+
+    <insert id="add" parameterType="com.cloudoer.project.project.module.bean.User">
+        insert into user (name) values(#{name})
+    </insert>
 </mapper>

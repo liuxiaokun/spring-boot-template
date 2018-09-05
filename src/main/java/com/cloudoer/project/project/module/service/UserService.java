@@ -1,6 +1,6 @@
 package com.cloudoer.project.project.module.service;
 
-import com.cloudoer.project.project.module.vo.UserVo;
+import com.cloudoer.project.project.module.dto.UserDto;
 
 import java.util.List;
 
@@ -12,5 +12,7 @@ import java.util.List;
 public interface UserService {
 
 
-    List<UserVo> list();
+    List<UserDto> list();
+
+    void addUser(UserDto userDto);
 }
