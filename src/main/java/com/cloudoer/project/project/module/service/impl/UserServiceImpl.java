@@ -20,7 +20,7 @@ import java.util.Optional;
  * @since 2018/9/4
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -59,9 +59,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectByPrimaryKey(userId);
         UserDto userDto = new UserDto();
 
-        Optional.ofNullable(user).ifPresent(u -> {
-            BeanUtils.copyProperties(user, userDto);
-        });
+        Optional.ofNullable(user).ifPresent(u -> BeanUtils.copyProperties(user, userDto));
 
         return userDto;
     }

@@ -1,6 +1,7 @@
 package com.cloudoer.project.project.module.bean;
 
 import lombok.Data;
+import tk.mybatis.mapper.annotation.Version;
 
 import javax.persistence.Id;
 
@@ -19,4 +20,10 @@ class BaseBean {
      */
     @Id
     private Long id;
+
+    /**
+     * 乐观锁
+     */
+    @Version
+    private Long version;
 }

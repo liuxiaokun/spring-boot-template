@@ -3,6 +3,7 @@ package com.cloudoer.project.project.module.dao;
 import com.cloudoer.project.project.module.bean.User;
 import com.cloudoer.project.project.module.utils.MyMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @since 2018/9/4
  */
 @Mapper
+@Component
 public interface UserMapper extends MyMapper<User> {
 
     /**

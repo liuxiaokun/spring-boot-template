@@ -1,5 +1,6 @@
 package com.cloudoer.project.project.module.controller;
 
+import com.cloudoer.project.project.module.bean.User;
 import com.cloudoer.project.project.module.config.UserConfig;
 import com.cloudoer.project.project.module.dto.UserDto;
 import com.cloudoer.project.project.module.service.UserService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -104,5 +106,13 @@ public class TestController {
     @GetMapping("mapper")
     public Object testCommonMapper(Long userId) {
         return userService.getUserById(userId);
+    }
+
+    @PostMapping("mapper")
+    public Object testCommonMapperAdd(UserVo userVo) {
+
+        User user = new User();
+        Optional.ofNullable(userVo).ifPresent(vo -> BeanUtils.copyProperties(userVo, user));
+        return userService.save(user);
     }
 }
