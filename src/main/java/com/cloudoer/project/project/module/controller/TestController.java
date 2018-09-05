@@ -4,6 +4,7 @@ import com.cloudoer.project.project.module.config.UserConfig;
 import com.cloudoer.project.project.module.dto.UserDto;
 import com.cloudoer.project.project.module.service.UserService;
 import com.cloudoer.project.project.module.vo.UserVo;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,8 @@ public class TestController {
     }
 
     @GetMapping("mybatis")
-    public Object testMybatis() {
+    public Object testMybatis(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return userService.list();
     }
 

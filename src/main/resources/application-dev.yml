@@ -27,3 +27,15 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.cloudoer.project.project.module.bean
 
+#mappers 多个接口时逗号隔开
+mapper:
+  #mappers: tk.mybatis.springboot.util.MyMapper
+  not-empty: false
+  identity: MYSQL
+#pagehelper配置
+pagehelper:
+  helperDialect: mariadb
+  reasonable: true
+  pageSizeZero: true
+  params: count=countSql
+

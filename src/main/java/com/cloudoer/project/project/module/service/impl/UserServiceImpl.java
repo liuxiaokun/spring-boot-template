@@ -4,7 +4,7 @@ import com.cloudoer.project.project.module.bean.User;
 import com.cloudoer.project.project.module.dao.UserMapper;
 import com.cloudoer.project.project.module.dto.UserDto;
 import com.cloudoer.project.project.module.service.UserService;
-import com.cloudoer.project.project.module.vo.UserVo;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,17 +25,17 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<UserDto> list() {
+    public PageInfo<UserDto> list() {
 
         List<User> query = userMapper.query();
 
-        List<UserDto> vos = new ArrayList<>();
+        List<UserDto> dtos = new ArrayList<>();
         query.forEach(v -> {
             UserDto userDto = new UserDto();
             BeanUtils.copyProperties(v, userDto);
-            vos.add(userDto);
+            dtos.add(userDto);
         });
-        return vos;
+        return new PageInfo<>(dtos);
     }
 
     @Override

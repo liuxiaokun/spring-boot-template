@@ -1,8 +1,7 @@
 package com.cloudoer.project.project.module.service;
 
 import com.cloudoer.project.project.module.dto.UserDto;
-
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @author liuxiaokun
@@ -12,7 +11,7 @@ import java.util.List;
 public interface UserService {
 
 
-    List<UserDto> list();
+    PageInfo<UserDto> list();
 
     void addUser(UserDto userDto);
 }
