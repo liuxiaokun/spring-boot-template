@@ -1,0 +1,41 @@
+#自定义配置文件
+user:
+  cname: fred1
+  age: 221
+  info: ${user.cname}已经${user.age}
+
+#Redis配置
+spring:
+  redis:
+    host: localhost
+    port: 6379
+
+  #数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:33066/test?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+
+#配置分布式session
+  session:
+    store-type: redis
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.cloudoer.project.project.module.bean
+
+#mappers 多个接口时逗号隔开
+mapper:
+  #mappers: tk.mybatis.springboot.util.MyMapper
+  not-empty: false
+  identity: MYSQL
+#pagehelper配置
+pagehelper:
+  helperDialect: mariadb
+  reasonable: true
+  pageSizeZero: true
+  params: count=countSql
+

@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.cloudoer.project.project.module.consts.Constant.DEFAULT_LOCK_VERSION;
+
 /**
  * @author liuxiaokun
  * @version 0.0.1
@@ -85,13 +87,13 @@ public class TestController {
 
     @GetMapping("ng")
     public Object testNg(HttpServletRequest request) {
-        log.info("ng, port:{}",  request.getLocalPort());
+        log.info("ng, port:{}", request.getLocalPort());
         return "ng:" + request.getLocalPort();
     }
 
     @GetMapping("session")
     public Object testSession(HttpServletRequest request) {
-        log.info("session, port:{}",  request.getLocalPort());
+        log.info("session, port:{}", request.getLocalPort());
 
         HttpSession session = request.getSession();
         log.info("session class:{}", session.getClass());
@@ -112,7 +114,10 @@ public class TestController {
     public Object testCommonMapperAdd(UserVo userVo) {
 
         User user = new User();
-        Optional.ofNullable(userVo).ifPresent(vo -> BeanUtils.copyProperties(userVo, user));
+        Optional.ofNullable(userVo).ifPresent(vo -> {
+            BeanUtils.copyProperties(userVo, user);
+            user.setVersion(DEFAULT_LOCK_VERSION);
+        });
         return userService.save(user);
     }
 }
