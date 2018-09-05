@@ -1,6 +1,7 @@
 package com.cloudoer.project.project.module.service;
 
 import com.cloudoer.project.project.module.dto.UserDto;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,16 @@ public class UserServiceTest {
         userService.addUser(userDto);
     }
 
-    ;
+    @Test
+    public void testGetById() {
+
+        Long userId = 6L;
+
+        UserDto userDto = userService.getUserById(userId);
+        Assert.assertNotNull(userDto);
+
+        UserDto userDto1 = userService.getUserById(userId);
+        Assert.assertNotNull(userDto);
+
+    }
 }

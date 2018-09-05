@@ -21,6 +21,8 @@ spring:
 #配置分布式session
   session:
     store-type: redis
+  cache:
+    type: simple
 
 
 mybatis:

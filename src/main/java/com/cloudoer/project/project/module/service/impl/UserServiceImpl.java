@@ -5,8 +5,10 @@ import com.cloudoer.project.project.module.dao.UserMapper;
 import com.cloudoer.project.project.module.dto.UserDto;
 import com.cloudoer.project.project.module.service.UserService;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,7 @@ import java.util.Optional;
  * @since 2018/9/4
  */
 @Service
+@Slf4j
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     @Autowired
@@ -54,8 +57,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     @Override
+    @Cacheable(cacheNames = "getUserById")
     public UserDto getUserById(Long userId) {
 
+        log.info("getUserById:{}", userId);
         User user = userMapper.selectByPrimaryKey(userId);
         UserDto userDto = new UserDto();
 
