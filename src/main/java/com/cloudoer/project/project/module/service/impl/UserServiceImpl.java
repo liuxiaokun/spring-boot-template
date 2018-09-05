@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author liuxiaokun
@@ -50,5 +51,18 @@ public class UserServiceImpl implements UserService {
         userMapper.add(user);
         user.setName("test transaction3");
         userMapper.add(user);
+    }
+
+    @Override
+    public UserDto getUserById(Long userId) {
+
+        User user = userMapper.selectByPrimaryKey(userId);
+        UserDto userDto = new UserDto();
+
+        Optional.ofNullable(user).ifPresent(u -> {
+            BeanUtils.copyProperties(user, userDto);
+        });
+
+        return userDto;
     }
 }

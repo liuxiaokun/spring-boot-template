@@ -14,4 +14,6 @@ public interface UserService {
     PageInfo<UserDto> list();
 
     void addUser(UserDto userDto);
+
+    UserDto getUserById(Long userId);
 }

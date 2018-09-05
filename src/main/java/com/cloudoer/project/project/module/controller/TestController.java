@@ -100,4 +100,9 @@ public class TestController {
         log.info("session value after:{}", session.getAttribute("user"));
         return "hey, fred. :" + request.getLocalPort();
     }
+
+    @GetMapping("mapper")
+    public Object testCommonMapper(Long userId) {
+        return userService.getUserById(userId);
+    }
 }
