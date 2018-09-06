@@ -4,6 +4,7 @@ import com.cloudoer.project.project.module.bean.User;
 import com.cloudoer.project.project.module.config.UserConfig;
 import com.cloudoer.project.project.module.dto.UserDto;
 import com.cloudoer.project.project.module.service.UserService;
+import com.cloudoer.project.project.module.utils.RespUtil;
 import com.cloudoer.project.project.module.vo.UserVo;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.cloudoer.project.project.module.consts.Constant.DEFAULT_LOCK_VERSION;
+import static com.cloudoer.project.project.module.consts.RespCode.SUCCESS;
+import static com.cloudoer.project.project.module.consts.RespMsg.OPERATION_SUCCESS;
 
 /**
  * @author liuxiaokun
@@ -73,7 +76,7 @@ public class TestController {
     @GetMapping("mybatis")
     public Object testMybatis(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return userService.list();
+        return RespUtil.succeed(SUCCESS, OPERATION_SUCCESS, userService.list());
     }
 
     @PostMapping("user")
@@ -107,7 +110,7 @@ public class TestController {
 
     @GetMapping("mapper")
     public Object testCommonMapper(Long userId) {
-        return userService.getUserById(userId);
+        return RespUtil.succeed(SUCCESS, OPERATION_SUCCESS, userService.getUserById(userId));
     }
 
     @PostMapping("mapper")
