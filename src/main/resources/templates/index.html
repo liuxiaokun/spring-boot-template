@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>learn Resources</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div style="text-align: center;margin:0 auto;width: 800px; ">
+    <h1>this is thymeleaf demo</h1>
+    <table width="100%" border="1" cellspacing="1" cellpadding="0">
+        <tr>
+            <td>作者</td>
+            <td>教程名</td>
+            <td>地址</td>
+        </tr>
+        <tr th:each="vo : ${voList}">
+            <td th:text="${vo.author}">作者</td>
+            <td th:text="${vo.name}">标题</td>
+            <td><a th:href="${vo.url}" target="_blank">链接</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
