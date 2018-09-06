@@ -8,4 +8,5 @@ package com.cloudoer.project.project.module.consts;
 public interface Constant {
 
     Long DEFAULT_LOCK_VERSION = 1L;
+    String EMPTY = "";
 }

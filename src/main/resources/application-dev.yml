@@ -21,6 +21,7 @@ spring:
 #配置分布式session
   session:
     store-type: redis
+#配置缓存注解
   cache:
     type: simple
 

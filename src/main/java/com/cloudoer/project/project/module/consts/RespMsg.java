@@ -8,6 +8,7 @@ package com.cloudoer.project.project.module.consts;
 public interface RespMsg {
 
     String OPERATION_SUCCESS = "操作成功";
+    String SERVER_INTERNAL_ERROR = "服务器内部错误";
     String OPERATION_FAILURE = "操作失败";
     String PLEASE_LOGIN_FIRST = "请先登录";
 }
