@@ -44,13 +44,26 @@ spring:
         enabled: true
         session-stat-enable: true
         profile-enable: true
-
   #配置分布式session
   session:
     store-type: redis
   #配置缓存注解
   cache:
     type: simple
+
+  #邮件配置
+  mail:
+    host: smtp.163.com
+    username: 18521599183@163.com
+    password: cloudoer2018
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
