@@ -35,11 +35,15 @@ spring:
       #配置一个连接在池中最小生存的时间，单位是毫秒
       min-evictable-idle-time-millis: 300000
       #配置监控统计拦截的filters
-      filters: stat
+      filters: stat,wall
       #打开PSCache
       pool-prepared-statements: true
       #每个连接上PSCache的大小
       max-pool-prepared-statement-per-connection-size: 20
+      web-stat-filter:
+        enabled: true
+        session-stat-enable: true
+        profile-enable: true
 
   #配置分布式session
   session:

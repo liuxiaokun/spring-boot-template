@@ -6,4 +6,12 @@ package com.cloudoer.project.project.module.exception;
  * @since 2018/9/5
  */
 public class BizException extends Exception {
+
+    public BizException(){
+
+    }
+
+    public BizException(String message){
+        super(message);
+    }
 }
