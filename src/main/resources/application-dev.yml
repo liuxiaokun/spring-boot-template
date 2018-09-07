@@ -71,6 +71,11 @@ spring:
     in-memory: true
     packages:
       trust-all: true
+  security:
+    user:
+      name: fred
+      password: fred
+      roles: ADMIN
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

@@ -32,7 +32,7 @@ public class SendMqQuartz {
     @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
 
-    @Scheduled(cron = "15/15 * * * * ?")
+    @Scheduled(cron = "0 0/60 * * * ?")
     public void produce() {
         log.info("定时器开始发MQ-queue消息了");
 

@@ -1,12 +1,12 @@
 package com.cloudoer.project.project.module.exception;
 
 import com.cloudoer.project.project.module.utils.RespUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import static com.cloudoer.project.project.module.consts.RespCode.SERVER_ERROR;
-import static com.cloudoer.project.project.module.consts.RespMsg.SERVER_INTERNAL_ERROR;
+import static com.cloudoer.project.project.module.consts.RespCode.EXCEPTION;
 
 /**
  * @author liuxiaokun
@@ -15,11 +15,19 @@ import static com.cloudoer.project.project.module.consts.RespMsg.SERVER_INTERNAL
  */
 @ControllerAdvice
 @ResponseBody
+@Slf4j
 public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(Exception.class)
     public Object handleException(Exception e) {
-        e.printStackTrace();
-        return RespUtil.fail(SERVER_ERROR, SERVER_INTERNAL_ERROR);
+        log.error("global handle Exception", e);
+        return RespUtil.fail();
     }
+
+    @ExceptionHandler(BizException.class)
+    public Object bizExceptionHandler(BizException ex) {
+        log.error("runtimeExceptionHandler", ex);
+        return RespUtil.fail(EXCEPTION, ex.getMessage());
+    }
+
 }

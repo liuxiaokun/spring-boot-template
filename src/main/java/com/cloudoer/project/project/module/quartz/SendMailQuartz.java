@@ -30,7 +30,7 @@ public class SendMailQuartz {
     @Value("${spring.mail.username}")
     private String from;
 
-    @Scheduled(cron = "0 0/30 * * * ?")
+    @Scheduled(cron = "0 0/60 * * * ?")
     public void send() throws MessagingException {
         log.info("定时器开始发邮件了");
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
