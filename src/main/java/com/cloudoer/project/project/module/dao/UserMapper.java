@@ -27,4 +27,6 @@ public interface UserMapper extends MyMapper<User> {
      * @param user data will be inserted.
      */
     void add(User user);
+
+    User queryByName(String name);
 }

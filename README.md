@@ -15,4 +15,15 @@
 * Quartz
 * Mail
 * ActiveMq
+* Common Response Data Style
+* Async
 * Spring Security
+
+## Spring MVC
+
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```

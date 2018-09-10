@@ -11,4 +11,8 @@ import lombok.Data;
 public class UserDto {
 
     private String name;
+
+    private String password;
+
+    private Boolean enable;
 }
