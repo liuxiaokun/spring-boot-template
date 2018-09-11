@@ -98,14 +98,18 @@ user:
 @ConfigurationProperties(prefix = "user")
 @Component
 public class UserConfig {
+
     private String cname;
+
     private Integer age;
+
     private String info;
 }
 ```
 2. 单个独立配置，用@Value进行注入。
 ```java
 public class UserConfig {
+    
     @Value("com.cname")
     private String name;
 }
