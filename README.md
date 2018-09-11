@@ -93,7 +93,7 @@ user:
   age: 221
   info: ${user.cname}已经${user.age}
 ```
-1. 一组相关的配置，用prefix方式直接注入Bean，更少的代码，更简洁。
+* 一组相关的配置，用prefix方式直接注入Bean，更少的代码，更简洁。
 ```java
 @ConfigurationProperties(prefix = "user")
 @Component
@@ -103,7 +103,7 @@ public class UserConfig {
     private String info;
 }
 ```
-2. 单个独立配置，用@Value进行注入。
+* 单个独立配置，用@Value进行注入。
 ```java
 public class UserConfig {
     @Value("com.cname")
