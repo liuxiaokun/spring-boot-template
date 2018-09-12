@@ -20,7 +20,7 @@
 * Async
 * Spring Security
 
-## 功能模块集成，使用
+## 功能模块集成&使用
 ### Spring MVC
 #### 如何集成Spring MVC?
 1. pom.xml新增spring-boot-starter-web依赖
@@ -86,10 +86,10 @@
         }
     }
     ```
-### Data Binding
 
+### Data Binding
 #### 如何使用配置数据绑定到对象？
-yml配置文件中配置数据
+1. yml配置文件中配置数据
     ```yaml
     #自定义配置文件
     user:
@@ -97,7 +97,7 @@ yml配置文件中配置数据
       age: 221
       info: ${user.cname}已经${user.age}
     ```
-1. 一组相关的配置，用prefix方式直接注入Bean，更少的代码，更简洁。
+2. 一组相关的配置，用prefix方式直接注入Bean，更少的代码，更简洁。
     ```java
     @ConfigurationProperties(prefix = "user")
     public class UserConfig {
@@ -108,7 +108,7 @@ yml配置文件中配置数据
         
     }
     ```
-2. 单个独立配置，用@Value进行注入。
+3. 单个独立配置，用@Value进行注入。
     ```java
     public class UserConfig {
         
@@ -139,12 +139,14 @@ yml配置文件中配置数据
 ### Redis
 #### 如何集成Redis
 1. pom.xml中添加redis的依赖。
+
     ```xml
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
     ```
+
 2. 注入StringRedisTemplate或者RedisTemplate成员，用来对redis进行操作。
 ```java
     public class UserServiceImpl implements UserService {
