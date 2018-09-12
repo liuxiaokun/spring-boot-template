@@ -1,5 +1,5 @@
 # Spring Boot 开发模板
-
+[TOC]
 ## 项目功能&模块列表
 * Spring MVC
 * Data Binding
@@ -826,4 +826,20 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
     }
 }
 ```
-
+## 项目结构
+![](.README_images\project-dir-structure.png)
+package目录说明
+* bean
+* config       配置文件
+* consts       常量
+* controller   控制器
+* dao          数据访问层
+* dto          数据传输对象
+* exception    自定义异常和异常处理
+* mq           消息队列
+* quartz       定时任务
+* security     安全框架相关
+* service      业务接口
+* service.impl 业务接口实现
+* util         通用工具类
+* vo           Value Object
