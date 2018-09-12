@@ -28,5 +28,4 @@ public interface UserMapper extends MyMapper<User> {
      */
     void add(User user);
 
-    User queryByName(String name);
 }
