@@ -468,7 +468,7 @@ public class SendMailQuartz {
 }
 ```
 ### ActiveMq
-#### 如何继承ActiveMq？
+#### 如何集成ActiveMq？
 pom.xml加入ActiveMq得依赖
 ```xml
 <dependency>
@@ -517,11 +517,11 @@ public class SendMq {
 
         //send queue message.
         Destination queue = new ActiveMQQueue("test-queue");
-        jmsMessagingTemplate.convertAndSend(queue, "hello.mq, queue, message!" + i);
+        jmsMessagingTemplate.convertAndSend(queue, "this is a queue message!");
 
         //send topic message.
         Destination topic = new ActiveMQTopic("test-topic");
-        jmsMessagingTemplate.convertAndSend(topic, "hello, mq ,topic" + i);
+        jmsMessagingTemplate.convertAndSend(topic, "this is a topic message!");
     }
 }
 ```
@@ -547,5 +547,283 @@ public class SimpleConsumer {
     }
 }
 ```
+### Common Response Data Style
+#### 数据接口API，统一返回格式工具类
+```java
+package com.cloudoer.project.project.module.utils;
 
+/**
+ * 用于Restful webService API数据接口统一返回。
+ *
+ * @author liuxiaokun
+ * @version 0.0.1
+ * @see com.cloudoer.project.project.module.consts.RespCode 返回码常量
+ * @see com.cloudoer.project.project.module.consts.RespMsg 返回信息常量
+ * @since 2018/9/6
+ */
+@AllArgsConstructor
+@Data
+public class RespUtil {
+
+    /**
+     * 返回码常量
+     *
+     * @see com.cloudoer.project.project.module.consts.RespCode 返回码常量
+     */
+    private int code;
+
+    /**
+     * 返回信息常量
+     *
+     * @see com.cloudoer.project.project.module.consts.RespMsg 返回信息常量
+     */
+    private String message;
+
+    /**
+     * 返回数据 Vo, 可以为任意数据类型
+     */
+    private Object data;
+
+    /**
+     * 数据接口访问 <b>成功</b> 的统一返回格式
+     * <ul>
+     * <li>code为 <code>SUCCESS</code> </li>
+     * <li>message为 <code>OPERATION_SUCCESS<code/> </li>
+     * <li>返回空数据 <code>EMPTY</code> </li>
+     * </ul>
+     *
+     * @return 返回实体
+     */
+    public static Object succeed() {
+        return new RespUtil(SUCCESS, OPERATION_SUCCESS, EMPTY);
+    }
+
+    /**
+     * 数据接口访问 <b>成功</b> 的统一返回格式
+     * <ul>
+     * <li>code为 <code>SUCCESS</code></li>
+     * <li>返回空数据 <code>EMPTY</code></li>
+     * </ul>
+     *
+     * @param message 返回提示信息
+     * @return 返回实体
+     */
+    public static Object succeed(String message) {
+        return new RespUtil(SUCCESS, message, EMPTY);
+    }
+
+    /**
+     * 数据接口访问 <b>成功</b> 的统一返回格式
+     * <ul>
+     * <li>code为 <code>SUCCESS</code> </li>
+     * <li>message为 <code>OPERATION_SUCCESS<code/> </li>
+     * </ul>
+     *
+     * @param data 返回数据
+     * @return 返回实体
+     */
+    public static Object succeed(Object data) {
+        return new RespUtil(SUCCESS, OPERATION_SUCCESS, data);
+    }
+
+    /**
+     * 数据接口访问 <b>成功</b> 的统一返回格式
+     * <ul>
+     * <li>code为 <code>SUCCESS</code> </li>
+     * </ul>
+     *
+     * @param message 返回提示信息
+     * @param data    返回数据
+     * @return 返回实体
+     */
+    public static Object succeed(String message, Object data) {
+        return new RespUtil(SUCCESS, message, data);
+    }
+
+    /**
+     * 数据接口访问 <b>成功</b> 的统一返回格式
+     *
+     * @param code    返回码
+     * @param message 返回提示信息
+     * @param data    返回数据
+     * @return 返回实体
+     */
+    public static Object succeed(int code, String message, Object data) {
+        return new RespUtil(code, message, data);
+    }
+
+    /**
+     * 数据接口访问 <b>失败</b> 的统一返回格式
+     * <ul>
+     * <li>code为 <code>FAILURE</code></li>
+     * <li>message为 <code>SERVER_INTERNAL_ERROR </code></li>
+     * <li>返回空数据</li>
+     * </ul>
+     *
+     * @return 返回实体
+     */
+    public static Object fail() {
+        return new RespUtil(FAILURE, SERVER_INTERNAL_ERROR, EMPTY);
+    }
+
+    /**
+     * 数据接口访问 <b>失败</b> 的统一返回格式
+     * <ul>
+     * <li>message为 <code>SERVER_INTERNAL_ERROR </code></li>
+     * <li>返回空数据</li>
+     * </ul>
+     *
+     * @param code 返回码
+     * @return 返回实体
+     */
+    public static Object fail(int code) {
+        return new RespUtil(code, OPERATION_FAILURE, EMPTY);
+    }
+
+    /**
+     * 数据接口访问 <b>失败</b> 的统一返回格式
+     * <ul>
+     * <li>返回空数据</li>
+     * </ul>
+     *
+     * @param code    返回码
+     * @param message 返回提示信息
+     * @return 返回实体
+     */
+    public static Object fail(int code, String message) {
+        return new RespUtil(code, message, EMPTY);
+    }
+
+    /**
+     * 数据接口访问 <b>失败</b> 的统一返回格式
+     *
+     * @param code    返回码
+     * @param message 返回提示信息
+     * @param data    返回数据
+     * @return 返回实体
+     */
+    public static Object fail(int code, String message, Object data) {
+        return new RespUtil(code, message, data);
+    }
+
+}
+
+```
+统一的错误码常量。
+```java
+/**
+ * <p>对响应码做如下约定</p>
+ * <ul>
+ * <li>100XX 为内置基本响应码</li>
+ * <li>200XX 为内置预留响应码</li>
+ * <li>300XX 为内置预留响应码</li>
+ * <li>400XX 为内置预留响应码</li>
+ * <li>500XX 为内置预留响应码</li>
+ * <li>600XX 为自定义响应码
+ * </ul>
+ *
+ * @author liuxiaokun
+ * @version 0.0.1
+ * @since 2018/9/6
+ */
+public interface RespCode {
+
+    int SUCCESS = 10000;
+
+    int NOT_SIGN_IN = 40000;
+    int FORBIDDEN = 40003;
+    int NOT_FOUND = 40004;
+
+    int FAILURE = 50000;
+    int EXCEPTION = 50001;
+    //···
+}
+```
+统一的错误提示信息常量。
+```java
+public interface RespMsg {
+
+    String OPERATION_SUCCESS = "操作成功";
+    String OPERATION_FAILURE = "操作失败";
+    String SERVER_INTERNAL_ERROR = "服务器内部错误";
+    String PLEASE_LOGIN_FIRST = "请先登录";
+    //···
+}
+```
+### Async
+#### 如何集成Spring Async？
+配置async executor
+```java
+@Configuration
+public class AsyncConfig implements AsyncConfigurer {
+
+    @Override
+    public Executor getAsyncExecutor() {
+
+        ThreadPoolTaskExecutor threadPoolExecutor = new ThreadPoolTaskExecutor();
+        threadPoolExecutor.setCorePoolSize(5);
+        threadPoolExecutor.setMaxPoolSize(50);
+        threadPoolExecutor.setQueueCapacity(100);
+
+        threadPoolExecutor.initialize();
+
+        return threadPoolExecutor;
+    }
+}
+```
+然后开启Async。
+```java
+@SpringBootApplication
+@EnableAsync
+public class ProjectModuleApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ProjectModuleApplication.class, args);
+    }
+}
+```
+### Spring Security
+#### 如何集成Spring Security？
+pom.xml中加入Spring Security的依赖
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+配置WebSecurityConfigurerAdapter，并用@EnableWebSecurity开启。
+```java
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DataSource dataSource;
+
+    private static final String roleQuery =
+            "select u.name, r.role_name from user u inner join user_role ur on ur.user_id = u.id inner join role r on r.id=ur.role_id" +
+                    " where u.name = ?";
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) {
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        /*auth.inMemoryAuthentication().passwordEncoder(passwordEncoder).
+                withUser("fred").password(passwordEncoder.encode("fred"))
+                .roles("ADMIN","USER");*/
+
+        auth.jdbcAuthentication().passwordEncoder(passwordEncoder)
+                .dataSource(dataSource).usersByUsernameQuery("select name, password, enable from user where name = ?")
+                .authoritiesByUsernameQuery(roleQuery);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        http.authorizeRequests().anyRequest().authenticated()
+                .and().formLogin().and().httpBasic();
+    }
+}
+```
 
