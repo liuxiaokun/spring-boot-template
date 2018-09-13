@@ -378,7 +378,7 @@ pom.xml加入Thymeleaf的依赖。
 然后在src/main/resources目录下
 * public 静态页面
 * static 静态文件，js，css，png
-* template 动态页面，thymeleaf模板文件存放地方
+* templates 动态页面，thymeleaf模板文件存放地方
 
 ### Global Exception Handler
 如何开发自己定制的全局异常处理？
@@ -828,7 +828,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 ```
 ## 项目结构
 ![](.README_images\project-dir-structure.png)
-package目录说明
+### package目录说明
 * bean
 * config       配置文件
 * consts       常量
