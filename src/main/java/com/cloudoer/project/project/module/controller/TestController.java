@@ -47,7 +47,7 @@ public class TestController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("test")
     public Object test() {
         return "hello spring boot, " + new Date();
     }

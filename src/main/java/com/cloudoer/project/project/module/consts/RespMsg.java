@@ -11,4 +11,5 @@ public interface RespMsg {
     String OPERATION_FAILURE = "操作失败";
     String SERVER_INTERNAL_ERROR = "服务器内部错误";
     String PLEASE_LOGIN_FIRST = "请先登录";
+    String NOT_FOUND = "找不到资源";
 }
